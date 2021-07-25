@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="poly.persistance.mapper.IUserMapper">
+
+	<!-- 아이디와 비밀번호가 일치하는지 확인  -->
+	<select id="getUserLoginCheck" parameterType="UserDTO" resultType="UserDTO">
+		SELECT USER_ID
+			FROM USER_INFO
+		WHERE USER_ID = #{user_id}
+			AND PASSWORD = #{password}
+	</select>
+
+	<!-- 회원가입 -->
+	<insert id="insertUserInfo" parameterType="UserDTO" >
+		INSERT INTO USER_INFO (
+		    USER_ID, PASSWORD, EMAIL, WRONGCH
+		) VALUES ( 
+			#{user_id},	#{password}, #{email}, #{wrongCh}
+		)
+	</insert>
+
+	<!-- 사용자 계정 확인 -->
+	<select id="existCheck" parameterType="UserDTO" resultType="UserDTO">
+		SELECT * FROM USER_INFO WHERE USER_ID = #{user_id}
+	</select>
+
+	<!-- 회원 비밀번호 초기화 -->
+	<update id="changePwd" parameterType="UserDTO">
+		UPDATE USER_INFO
+		SET PASSWORD = #{password}
+		WHERE USER_ID = #{user_id}
+	</update>
+
+	<!-- 가장 최근에 사용자가 틀린 단어들을 오답노트에 보여주기 위한 구문-->
+	<update id="updateWrongCh" parameterType="UserDTO">
+		UPDATE USER_INFO
+		SET WRONGCH = #{wrongCh}
+		WHERE USER_ID = #{user_id}
+	</update>
+
+	<!-- 최근에 틀린 문자 가져오기 -->
+	<select id="getWrongCh" parameterType="UserDTO" resultType="UserDTO">
+		SELECT WRONGCH
+		FROM USER_INFO
+		WHERE USER_ID = #{user_id}
+	</select>
+
+	<!-- 아이디 찾기에서 등록된 이메일인지 확인 -->
+	<select id="getFindId" parameterType="UserDTO" resultType="UserDTO">
+		SELECT USER_ID FROM USER_INFO
+		WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 회원가입 시 아이디 중복 확인 -->
+	<select id="getUserExists" parameterType="UserDTO" resultType="UserDTO">
+		SELECT (CASE WHEN COUNT(1)=0 THEN 'N' ELSE 'Y' END) AS EXISTS_YN
+		FROM USER_INFO
+		WHERE EMAIL = #{email}
+	</select>
+
+	<!-- 계정 탈퇴 -->
+	<delete id="deleteUser">
+		DELETE FROM USER_INFO
+		WHERE USER_ID = #{user_id}
+			AND PASSWORD = #{password}
+	</delete>
+
+	<!-- 사용자 이메일 업데이트 -->
+	<update id="updateUserInfo" parameterType="UserDTO">
+		UPDATE USER_INFO
+		SET EMAIL = #{email}
+		WHERE USER_ID = #{user_id}
+	</update>
+
+	<!-- 이메일 보기 -->
+	<select id="showEmail" parameterType="UserDTO" resultType="UserDTO">
+		SELECT EMAIL
+		FROM USER_INFO
+		WHERE USER_ID = #{user_id}
+	</select>
+</mapper>
