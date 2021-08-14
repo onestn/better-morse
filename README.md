@@ -13,10 +13,9 @@ WebSite : http://yang.ncloudpaas-ta.com
 	- 프레임워크 : SpringFramework MVC
 	- 데이터베이스 : MySQL, MongoDB
 	- 클라우드 환경 : ncloud
-	- 기타 기술 : Ajax, JQuery, WebAudioAPI
+	- 사용 언어 : Java, JavaScript
+	- 사용 기술 : Ajax, WebAudioAPI
 	- 에디터 : IntelliJ
-
-웹 서버 배포는 네이버클라우드 서비스를 통해 배포하였습니다.
 
 ## 기능
 
