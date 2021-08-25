@@ -6,7 +6,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import poly.dto.UserDTO;
+import poly.service.IMailService;
 import poly.service.IUserService;
+import poly.util.CmmUtil;
+import poly.util.EncryptUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,11 +19,26 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class TestController {
 
+	@Resource(name="MailService")
+	private IMailService mailService;
+
 	@Resource(name="UserService")
 	private IUserService userService;
 
 	private Logger log = Logger.getLogger(this.getClass());
-		
+
+
+		@RequestMapping(value="/Test/email")
+		public String StarEduNum() {
+			log.info(this.getClass().getName() + ".메일 START!");
+
+			int number = mailService.doSendMail();
+
+			log.info("성공여부 : " + number);
+
+			return "/Test/test";
+		}
+
 		@RequestMapping(value="/Test/TestMain") 
 		public String StartEduNum() {
 			log.info(this.getClass().getName() + ".MorseEdu START!");

@@ -295,7 +295,7 @@ public class UserController {
 			msg = "입력하신 이메일로 회원님의 아이디를 발송했습니다.";
 
 			model.addAttribute("msg", msg);
-			mailService.doSendMail(mDTO);
+//			mailService.doSendMail(mDTO);
 		}
 
 		return "/index";
@@ -325,7 +325,7 @@ public class UserController {
 			mDTO.setTitle("비밀번호 찾기를 위한 인증번호입니다.");
 			mDTO.setContents("인증번호는 " + certNum + "입니다.");
 
-			mailService.doSendMail(mDTO);
+//			mailService.doSendMail(mDTO);
 		} else {
 			msg = "가입되지 않은 아이디입니다!";
 

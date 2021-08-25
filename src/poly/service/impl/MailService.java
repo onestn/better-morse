@@ -2,10 +2,10 @@ package poly.service.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import poly.dto.MailDTO;
 import poly.service.IMailService;
-import poly.util.CmmUtil;
 
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -14,15 +14,18 @@ import java.util.Properties;
 @Service("MailService")
 public class MailService implements IMailService {
 
-    // 로그 파일 생성 및 로그 출력을 위한 log4j 프레임워크의 자바 객체
     private Logger log = Logger.getLogger(this.getClass());
 
-    final String host = "smtp.gmail.com"; // 네이버에서 제공하는 SMTP서버
-    final String user = "yang991211@gmail.com"; //네이버 이메일주소입력
-    final String password ="diddnjstjr1024"; // 비밀번호입력
+    final String host = "smtp.gmail.com"; // 구글에서 제공하는 SMTP서버
+    final String from = "yang991211@gmail.com"; // 구글 이메일주소입력
+    final String password =""; // 비밀번호입력
+
+    final String to = "yang991211@naver.com";
+    final String attachedFile = "/Users/dead_line/test.txt";
+    // C:\Users\admin\test.txt
 
     @Override
-    public int doSendMail(MailDTO pDTO) {
+    public int doSendMail() {
 
         // 로그 찍기(추후 찍은 로그를 통해 이 함수에 접근했는지 파악하기 용이하다.)
         log.info(this.getClass().getName() + ".doSendMail start!");
@@ -30,35 +33,35 @@ public class MailService implements IMailService {
         // 메일 발송 성공여부(발송성공 : 1 / 발송실패 : 0)
         int res = 1;
 
-        // 전달 받은 DTO로부터 데이터 가져오기(DTO객체가 메모리에 올라가지 않아 Null이 발생할 수 있기 떄문에 에러방지차원으로 if문 사용함)
-        if (pDTO == null) {
-            pDTO = new MailDTO();
-        }
-
-        String toMail = CmmUtil.nvl(pDTO.getToMail());
-
         Properties props = new Properties();
         props.put("mail.smtp.host", host); // javax 외부 라이브러리에 메일 보내는 사람의 정보 설정
         props.put("mail.smtp.auth", "true"); // javax 외부 라이브러리에 메일 보내는 사람 인증 여부 설정
         props.put("mail.smtp.starttls.enable", "true"); // 로그인시 TLS를 사용
-        props.put("mail.smtp.port", "587");     // TLS 포트트
-        // 네이버 SMTP서버 인증 처리 로직
+        props.put("mail.smtp.port", "587");     // TLS 포트
+
+        // 구글 SMTP서버 인증 처리 로직
         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(user, password);
+                return new PasswordAuthentication(from, password);
             }
         });
 
         try {
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(user));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
             // 메일 제목
-            message.setSubject(CmmUtil.nvl(pDTO.getTitle()));
+            message.setSubject("제목");
 
             // 메일 내용
-            message.setText(CmmUtil.nvl(pDTO.getContents()));
+            message.setText("내용");
+
+            // 보낼 파일의 경로 지정
+            FileDataSource fds = new FileDataSource(attachedFile);
+
+            message.setDataHandler(new DataHandler(fds));
+            message.setFileName(fds.getName());
 
             // 메일발송
             Transport.send(message);
