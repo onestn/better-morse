@@ -7,7 +7,7 @@
 
 최종 목표는 특전사에 보급되어 다양한 환경에서 모스부호를 익힐 수 있도록 함
 
-WebSite : http://yang.ncloudpaas-ta.com
+~~WebSite : http://yang.ncloudpaas-ta.com~~
 
 ## 적용 기술
 	- 프레임워크 : SpringFramework MVC
