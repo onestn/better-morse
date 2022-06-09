@@ -12,7 +12,7 @@
 ## 적용 기술
 	- 프레임워크 : SpringFramework MVC
 	- 데이터베이스 : MySQL, MongoDB
-	- 클라우드 환경 : ncloud
+	- 배포 환경 : ncloud
 	- 사용 언어 : Java, JavaScript
 	- 사용 기술 : Ajax, WebAudioAPI
 	- 에디터 : IntelliJ
