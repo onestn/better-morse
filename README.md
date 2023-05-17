@@ -1,22 +1,22 @@
-# BetterMorse
-
+# BetterMorse - 보다 나은 모스부호 교육 앱
+---
 "군대에서 배운 모스부호를 어떻게 하면 일반인들이 쉽게 배울 수 있을까?"
 라는 생각으로 일반인들도 쉽게 모스부호를 배울 수 있는 프로젝트입니다.
 
 최종 목표는 특전사에 보급되어 다양한 환경에서 모스부호를 익힐 수 있도록 함
 
-~~WebSite : http://yang.ncloudpaas-ta.com~~
+~~WebSite : http://yang.ncloudpaas-ta.com~~(서버 종료)
 
 ## 적용 기술
-	- 프레임워크 : SpringFramework MVC
-	- 데이터베이스 : MySQL, MongoDB
-	- 배포 환경 : ncloud
-	- 사용 언어 : Java, JavaScript
-	- 사용 기술 : Ajax, WebAudioAPI
-	- 에디터 : IntelliJ
+---
+	- Framework : SpringFramework MVC
+	- Database : MySQL, MongoDB
+	- WebServer : ~~ncloud~~, ~~AWS~~
+	- Programming Language : Java, JavaScript
+	- Library : WebAudioAPI
 
 ## 기능
-
+---
 학습법의 종류는 크게 두 가지로, 첫 번째는 사용자가 직접 모스부호를 Spacebar로 입력하는 것이고, 두 번째는 출력되는 모스부호의 Sound를 듣고 답을 맞추는 방식입니다.
 
 1. Playground
@@ -32,14 +32,11 @@
 	- MongoDB에 저장되는 문자는 추 후 전체 사용자들이 제일 많이 틀린 문자를 WordCloud로 출력하기 위함이다.
 
 ### 프로젝트 기간 
-	- 2021.05.01 ~ 2021.06.01
-
-#### 부족한 점
-	1. Ajax
-	2. Spring Annotation
-	3. JavaScript 개념
+---
+	- 2021.05.01 ~ 2021.06.01(약 한 달간 진행)
 
 #### TODO
+---
 	1. 사용자가 만드는 단어 퀴즈를 모스부호로 출제
 	2. Education, Test에서 각 문자를 counting하여 칸으로 힌트
 	3. 해군이 배에서 깜빡이로 신호를 보내는 것처럼 화면에 출력
