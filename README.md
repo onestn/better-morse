@@ -5,13 +5,13 @@
 
 최종 목표는 특전사에 보급되어 다양한 환경에서 모스부호를 익힐 수 있도록 함
 
-~~WebSite : http://yang.ncloudpaas-ta.com~~(서버 종료)
+~~WebSite : http://yang.ncloudpaas-ta.com~~ (서버 종료)
 
 ## 적용 기술
 ---
 	- Framework : SpringFramework MVC
 	- Database : MySQL, MongoDB
-	- WebServer : ~~ncloud~~, ~~AWS~~
+	- WebServer : ncloud, AWS
 	- Programming Language : Java, JavaScript
 	- Library : WebAudioAPI
 
